@@ -1,4 +1,4 @@
-import Timer from "../../entities/Timer";
+import Timer from "../../models/Timer";
 
 import { observer } from "mobx-react";
 
