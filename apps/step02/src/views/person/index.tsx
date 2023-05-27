@@ -1,8 +1,12 @@
-import person from "../../models/person";
+import { Person } from "../../models/person";
 
 import * as mobxReact from "mobx-react";
 
-export default mobxReact.observer(() => {
+type Props = {
+  person: Person;
+};
+
+export default mobxReact.observer(({ person }: Props) => {
   return (
     <div>
       <div>
