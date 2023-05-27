@@ -1,3 +1,11 @@
+import PersonView from "../src/views/person";
+
 export default function Index() {
-  return <>Hello world</>;
+  return (
+    <>
+      <h1>Cadastro</h1>
+
+      <PersonView />
+    </>
+  );
 }
