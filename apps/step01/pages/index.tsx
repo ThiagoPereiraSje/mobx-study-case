@@ -1,4 +1,4 @@
-import TimerView from "../src/components/TimerView";
+import TimerView from "../src/components/Timer";
 import Timer from "../src/entities/Timer";
 
 const myTimer = new Timer();
