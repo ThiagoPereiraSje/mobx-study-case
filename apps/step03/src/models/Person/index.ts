@@ -1,11 +1,11 @@
-import { Instance, SnapshotIn, SnapshotOut, types } from "mobx-state-tree";
+import { Instance, SnapshotOut, types } from "mobx-state-tree";
 
 export const Person = types
   .model("Person", {
-    id: types.number,
-    firstName: types.string,
-    lastName: types.string,
-    age: types.number,
+    id: types.optional(types.union(types.number, types.undefined), undefined),
+    firstName: types.optional(types.string, ""),
+    lastName: types.optional(types.string, ""),
+    age: types.optional(types.number, 0),
   })
   .actions((self) => ({
     setFirstName(value: string) {
@@ -20,5 +20,4 @@ export const Person = types
   }));
 
 export type IPerson = Instance<typeof Person>;
-export type IPersonIn = SnapshotIn<typeof Person>;
 export type IPersonDTO = SnapshotOut<typeof Person>;
