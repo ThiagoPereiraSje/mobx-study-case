@@ -1,17 +1,17 @@
-import { IPersonDTO } from "src/models/Person/";
+import { IPersonDTO } from "src/models/Person";
 
 export class PersonRepository {
   static async query(): Promise<IPersonDTO[]> {
-    console.log("Exec query");
+    // Executar a query
 
     return [];
   }
 
   static async mutate(person: IPersonDTO) {
-    console.log("Exec mutation: ", person);
+    // Executar a mutation;
   }
 
   static subscribe() {
-    console.log("Exec subscription");
+    // Executar a subscription
   }
 }
