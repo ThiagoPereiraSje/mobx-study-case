@@ -1,4 +1,4 @@
-import { IPersonDTO } from "src/models/Person";
+import { IPersonDTO } from "src/models/Person/";
 
 export class PersonRepository {
   static async query(): Promise<IPersonDTO[]> {
