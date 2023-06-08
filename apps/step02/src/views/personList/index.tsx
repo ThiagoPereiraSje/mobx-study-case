@@ -1,12 +1,12 @@
 import { PersonList } from "../../models/personList";
 
-import * as mobxReact from "mobx-react";
+import { observer } from "mobx-react";
 
 type Props = {
   personList: PersonList;
 };
 
-export default mobxReact.observer(({ personList }: Props) => {
+export default observer(({ personList }: Props) => {
   return (
     <>
       <h1>Lista de pessoas</h1>

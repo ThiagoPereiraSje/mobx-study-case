@@ -1,12 +1,12 @@
 import { Person } from "./person";
 
-import * as mobx from "mobx";
+import { observable } from "mobx";
 
 export type PersonList = {
   store: Person[];
 };
 
-const personList = mobx.observable<PersonList>({
+const personList = observable<PersonList>({
   store: [],
 });
 

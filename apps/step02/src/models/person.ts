@@ -1,4 +1,4 @@
-import * as mobx from "mobx";
+import { observable } from "mobx";
 
 export type Person = {
   firstName: string;
@@ -6,7 +6,7 @@ export type Person = {
   age: number;
 };
 
-const person = mobx.observable<Person>({
+const person = observable<Person>({
   firstName: "",
   lastName: "",
   age: 0,
