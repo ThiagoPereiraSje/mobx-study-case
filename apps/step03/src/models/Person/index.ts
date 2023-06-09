@@ -1,4 +1,4 @@
-import { Instance, SnapshotOut, types } from "mobx-state-tree";
+import { Instance, types } from "mobx-state-tree";
 
 export const Person = types
   .model("Person", {
@@ -20,4 +20,4 @@ export const Person = types
   }));
 
 export type IPerson = Instance<typeof Person>;
-export type IPersonDTO = SnapshotOut<typeof Person>;
+export type IPersonDTO = Pick<IPerson, "id" | "firstName" | "lastName" | "age">;
