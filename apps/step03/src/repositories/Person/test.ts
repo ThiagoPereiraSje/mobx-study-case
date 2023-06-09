@@ -14,4 +14,10 @@ describe("Person Repository", () => {
 
     expect(result.data?.affected_rows).toBe(1);
   });
+
+  test("GetAll", async () => {
+    const result = await PersonRepository.getAll();
+
+    expect(result.data).not.toBe(undefined);
+  });
 });

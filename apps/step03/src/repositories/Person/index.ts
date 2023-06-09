@@ -2,8 +2,8 @@ import { gql } from "graphql-request";
 import { httpClient } from "src/graphql/httpClient";
 import { IPersonDTO } from "src/models/Person";
 
-const InsertPerson = gql`
-  mutation InsertPerson($firstName: String, $lastName: String, $age: Int) {
+const Insert = gql`
+  mutation Insert($firstName: String, $lastName: String, $age: Int) {
     data: insert_person(
       objects: { firstName: $firstName, lastName: $lastName, age: $age }
     ) {
@@ -18,18 +18,29 @@ const InsertPerson = gql`
   }
 `;
 
-export class PersonRepository {
-  static async query(): Promise<IPersonDTO[]> {
-    // Executar a query
+const GeAll = gql`
+  query GetAll {
+    data: person {
+      firstName
+      lastName
+      age
+      id
+    }
+  }
+`;
 
-    return [];
+export class PersonRepository {
+  static async getAll() {
+    const result = await httpClient.request<GraphqlQuery<IPersonDTO>>(GeAll);
+
+    return result;
   }
 
   static async insert(person: IPersonDTO) {
     const result = await httpClient.request<
       GrahpqlMutation<IPersonDTO>,
       IPersonDTO
-    >(InsertPerson, person);
+    >(Insert, person);
 
     return result;
   }
