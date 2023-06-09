@@ -23,6 +23,7 @@
     "node": ">=14.0.0"
   },
   "dependencies": {
+    "graphql": "^16.6.0",
     "graphql-request": "^6.1.0",
     "mobx": "^6.9.0",
     "mobx-react": "^7.6.0",

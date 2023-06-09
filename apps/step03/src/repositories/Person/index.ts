@@ -4,7 +4,7 @@ import { IPersonDTO } from "src/models/Person";
 
 const InsertPerson = gql`
   mutation InsertPerson($firstName: String, $lastName: String, $age: Int) {
-    insert_person(
+    data: insert_person(
       objects: { firstName: $firstName, lastName: $lastName, age: $age }
     ) {
       affected_rows
@@ -26,10 +26,10 @@ export class PersonRepository {
   }
 
   static async insert(person: IPersonDTO) {
-    const result = await httpClient.request<unknown, IPersonDTO>(
-      InsertPerson,
-      person
-    );
+    const result = await httpClient.request<
+      GrahpqlMutation<IPersonDTO>,
+      IPersonDTO
+    >(InsertPerson, person);
 
     return result;
   }

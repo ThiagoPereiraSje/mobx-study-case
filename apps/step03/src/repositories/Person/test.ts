@@ -1,15 +1,17 @@
-import { IPerson, Person } from "../../models/Person";
-
 import { PersonRepository } from ".";
 
+import { IPerson, Person } from "src/models/Person";
+
 describe("Person Repository", () => {
-  test("Mutate person", async () => {
-    const person: IPerson = Person.create();
+  test("Insert", async () => {
+    const person: IPerson = Person.create({
+      firstName: "Thiago",
+      lastName: "Pereira",
+      age: 30,
+    });
 
-    await PersonRepository.insert(person);
+    const result = await PersonRepository.insert(person);
 
-    const result = await PersonRepository.query();
-
-    expect(result.length).toBe(1);
+    expect(result.data?.affected_rows).toBe(1);
   });
 });
