@@ -2,6 +2,18 @@ import { PersonRepository } from ".";
 
 import { IPerson, Person } from "src/models/Person";
 
+beforeAll(() => {
+  PersonRepository.subscribe(
+    (data) => console.log("data: ", data),
+    (error) => console.log("error: ", error),
+    () => console.log("complete subscription")
+  );
+});
+
+afterAll(() => {
+  PersonRepository.unSubscribe();
+});
+
 describe("Person Repository", () => {
   test("Insert", async () => {
     const person: IPerson = Person.create({

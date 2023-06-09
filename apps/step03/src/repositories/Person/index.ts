@@ -1,5 +1,10 @@
 import { gql } from "graphql-request";
 import { httpClient } from "src/graphql/httpClient";
+import {
+  ClientError,
+  getWsClient,
+  WebSocketClient,
+} from "src/graphql/wsClient";
 import { IPersonDTO } from "src/models/Person";
 
 const Insert = gql`
@@ -29,7 +34,20 @@ const GeAll = gql`
   }
 `;
 
+const Subscribe = gql`
+  subscription Subscribe {
+    data: person(limit: 1, order_by: { id: desc }) {
+      firstName
+      lastName
+      age
+      id
+    }
+  }
+`;
+
 export class PersonRepository {
+  static wsClient: WebSocketClient;
+
   static async getAll() {
     const result = await httpClient.request<GraphqlQuery<IPersonDTO>>(GeAll);
 
@@ -45,7 +63,21 @@ export class PersonRepository {
     return result;
   }
 
-  static subscribe() {
-    // Executar a subscription
+  static async subscribe(
+    next: (data: GraphqlQuery<IPersonDTO>) => void,
+    error: (error: ClientError) => void,
+    complete?: () => void
+  ) {
+    this.wsClient = await getWsClient();
+
+    this.wsClient.subscribe<GraphqlQuery<IPersonDTO>>(Subscribe, {
+      next,
+      error,
+      complete,
+    });
+  }
+
+  static unSubscribe() {
+    this.wsClient.close();
   }
 }
